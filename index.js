@@ -47,7 +47,9 @@ const copyDir = (copyFrom, copyTo) => {
         fs.mkdirSync(dest, { recursive: true });
       }
     } else {
-      fs.copyFileSync(filepath, dest);
+      if (!fs.existsSync(dest)) {
+        fs.copyFileSync(filepath, dest);
+      }
     }
   };
   recurseSync(copyFrom, copy);
